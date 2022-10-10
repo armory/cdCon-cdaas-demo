@@ -38,6 +38,8 @@ strategies:
           # there are multiple step types. setWeight changes what percentage of traffic reaches the new version.
           - setWeight:
               weight: 25
+          - runWebhook:
+              name: Check_Logs_For_Errors
           - pause:
               untilApproved: true
           - setWeight:
@@ -57,3 +59,19 @@ strategies:
       shutDownOldVersionAfter:
         - pause:
             untilApproved: true
+webhooks:
+  - name: Check_Logs_For_Errors
+    method: POST
+    uriTemplate: https://api.cloud.armory.io/sandbox/web-hook
+    headers:
+      # - key: Authorization
+      #   value: token {{secrets.github_token}}
+      - key: Content-Type
+        value: application/json
+    bodyTemplate:
+      inline:  >-
+        {
+          "callbackUri": "{{armory.callbackUri}}/callback",
+          "success": true
+        }
+    retryCount: 3
