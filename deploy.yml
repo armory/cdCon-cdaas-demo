@@ -71,8 +71,6 @@ webhooks:
     method: POST
     uriTemplate: https://api.cloud.armory.io/sandbox/webhook
     headers:
-      # - key: Authorization
-      #   value: token {{secrets.github_token}}
       - key: Content-Type
         value: application/json
     bodyTemplate:
@@ -86,8 +84,6 @@ webhooks:
     method: POST
     uriTemplate: https://api.cloud.armory.io/sandbox/webhook
     headers:
-      # - key: Authorization
-      #   value: token {{secrets.github_token}}
       - key: Content-Type
         value: application/json
     bodyTemplate:
