@@ -10,6 +10,10 @@ targets:
     namespace: armory-sample-application
     # This is the name of the strategy to use when deploying.
     strategy: mycanary
+#    constraints:
+#      afterDeployment:
+#        - runWebhook:
+#            name: Sample_Integration_test
 
   my-second-environment:
     # the name of an agent configured account. Agent Name can be found at https://console.cloud.armory.io/configuration > Agents
@@ -19,6 +23,9 @@ targets:
     strategy: mycanary
     constraints:
       dependsOn: [my-first-environment]
+      afterDeployment:
+        - runWebhook:
+            name: Sample_Integration_test
 # The list of manifests to deploy
 manifests:
   # This will read all yaml|yml files in a dir and deploy all manifests in that directory to all targets, or their specified target.
@@ -39,7 +46,7 @@ strategies:
           - setWeight:
               weight: 25
           - runWebhook:
-              name: Check_Logs_For_Errors
+              name: Check_Logs_for_errors
           - pause:
               untilApproved: true
           - setWeight:
@@ -60,9 +67,9 @@ strategies:
         - pause:
             untilApproved: true
 webhooks:
-  - name: Check_Logs_For_Errors
+  - name: Sample_Integration_tests
     method: POST
-    uriTemplate: https://api.cloud.armory.io/sandbox/web-hook
+    uriTemplate: https://api.cloud.armory.io/sandbox/webhook
     headers:
       # - key: Authorization
       #   value: token {{secrets.github_token}}
@@ -70,6 +77,21 @@ webhooks:
         value: application/json
     bodyTemplate:
       inline:  >-
+        {
+          "callbackUri": "{{armory.callbackUri}}/callback",
+          "success": true
+        }
+    retryCount: 3
+  - name: Check_Logs_for_errors
+    method: POST
+    uriTemplate: https://api.cloud.armory.io/sandbox/webhook
+    headers:
+      # - key: Authorization
+      #   value: token {{secrets.github_token}}
+      - key: Content-Type
+        value: application/json
+    bodyTemplate:
+      inline: >-
         {
           "callbackUri": "{{armory.callbackUri}}/callback",
           "success": true
