@@ -1,4 +1,4 @@
-#CD-as-a-Service-demo
+#cdCon-CD-as-a-Service-demo
 Get started with using CD-as-a-Service by deploying a sample application to your cluster.
 
 ## Without Using Github CLI
@@ -15,7 +15,7 @@ read:artifacts:data
 ```
 4. Copy the Client ID and Client Secret so that they can be saved as secrets later. 
 5. Navigate to the Github page of your fork.
-`https://github.com/<github-user-name>/cdaas-demo`
+`https://github.com/<github-user-name>/cdCon-cdaas-demo`
 6. Navigate to the Repository settings → Secrets → Actions
 7. Create 2 new secrets
    1. `CDAAS_CREDENTIAL_ID` and paste the value for Client ID created in Step 3 
@@ -29,7 +29,7 @@ read:artifacts:data
     
 1. Setup RNA using the docs here https://docs.armory.io/cd-as-a-service/setup/get-started/#prepare-your-deployment-target
 2. Create a fork of this repo
-    `gh repo fork https://github.com/armory/cdaas-demo --fork-name cdaas-demo --clone`
+    `gh repo fork https://github.com/armory/cdCon-cdaas-demo --fork-name cdCon-cdaas-demo --clone`
 3. Create new machine to machine credentials 
    1. Go to https://console.cloud.armory.io/configuration > Client Credentials 
    2. You can select the preconfigured scope group Deployments using Spinnaker or manually select the following:
