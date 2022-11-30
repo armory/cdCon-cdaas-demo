@@ -29,7 +29,7 @@ targets:
       dependsOn: [my-first-environment]
       afterDeployment:
         - runWebhook:
-            name: Sample_Integration_test
+            name: Sample_Integration_tests
 # The list of manifests to deploy
 manifests:
   # This will read all yaml|yml files in a dir and deploy all manifests in that directory to all targets, or their specified target.
