@@ -51,6 +51,12 @@ strategies:
               weight: 25
           - runWebhook:
               name: Check_Logs_for_errors
+          - exposeServices:
+              services:
+                - sample-app-svc
+              ttl:
+                duration: 45
+                unit: MINUTES
           - pause:
               untilApproved: true
           - setWeight:
